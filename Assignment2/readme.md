@@ -31,13 +31,11 @@ ROLL_NUMBER = 102303862
 
 Transformation parameters:
 
-[
-a_r = 0.5 \times (r \bmod 7) = 1.5
-]
+$a_r = 0.5 \times (r \bmod 7) = 1.5$
 
-[
-b_r = 0.3 \times (r \bmod 5 + 1) = 0.9
-]
+
+$b_r = 0.3 \times (r \bmod 5 + 1) = 0.9$
+
 
 The transformation applied to NO₂ values:
 
