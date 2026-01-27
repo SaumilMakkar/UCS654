@@ -234,3 +234,69 @@ If curves overlap & Q-Q points lie near diagonal → GAN learned distribution su
 ✔ Loss curves show stable training
 ✔ No mode collapse observed
 ✔ Suitable for **non-parametric density estimation**
+
+---
+
+Perfect — we’ll add an **Output Section** to your existing README and integrate these two screenshots cleanly.
+
+Below is the exact block you can copy-paste into your `README.md`, and then just replace image paths with your files.
+
+---
+
+# 🖼 **7. Output & Visual Results**
+
+This section presents the visual and quantitative outputs obtained after training the GAN on the transformed NO₂ distribution.
+
+---
+
+## ✅ **7.1 PDF Comparison (Real vs Generated)**
+
+The plot below compares the **Kernel Density Estimates (KDE)** of the real transformed distribution and the generated distribution:
+
+* **Blue** → Real transformed PDF ( p_h(z) )
+* **Orange** → Generated PDF ( p_h(g) )
+
+This visualization confirms that the GAN has learned the density shape reasonably well.
+
+```md
+![PDF Comparison](ss2.png)
+```
+
+
+---
+
+## **7.2 Quantitative Evaluation**
+
+The following metrics are computed after training:
+
+| Metric               | Value   | Interpretation                    |
+| -------------------- | ------- | --------------------------------- |
+| Mode coverage        | good    | Distribution peaks captured       |
+| Quality              | good    | Matches global distribution shape |
+| KS Statistic         | 0.1035… | Low CDF deviation                 |
+| Wasserstein Distance | 1.7705… | Very close distribution matching  |
+
+Terminal output:
+
+```
+Mode coverage: good
+Quality: good
+KS: 0.10357275622082573
+Wasserstein: 1.7705766257785158
+```
+
+Visual reference:
+
+![Metrics Output](ss1.png)
+
+---
+
+## **Interpretation**
+
+✔ The **Wasserstein distance ≈ 1.77** indicates the generated distribution is very close to real data.
+✔ The **KS statistic ≈ 0.10** confirms small cumulative distribution differences.
+✔ The **“good” mode coverage** suggests no mode collapse.
+✔ Visual PDF overlap validates that the GAN learned the transformed PDF smoothly.
+
+
+
