@@ -263,7 +263,7 @@ This visualization confirms that the GAN has learned the density shape reasonabl
 
 Preview from your output:
 
-![PDF Comparison](ss1.png)
+![PDF Comparison](ss2.png)
 
 ---
 
