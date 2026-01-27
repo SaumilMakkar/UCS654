@@ -66,9 +66,7 @@ Final cleaned vector: ( x )
 
 Using:
 
-[
-z = x + a_r \sin(b_r x)
-]
+$z = x + a_r \sin(b_r x)$
 
 Result: transformed data ( z )
 
@@ -121,9 +119,8 @@ At each epoch:
 
 Goal:
 
-[
-\min_G \max_D ,, \mathbb{E}[\log D(z)] + \mathbb{E}[\log(1 - D(G(\xi)))]
-]
+$\min_G \max_D \, \mathbb{E}[\log D(z)] + \mathbb{E}[\log(1 - D(G(\xi)))]$
+
 
 ---
 
@@ -176,9 +173,8 @@ Shows evolution of:
 
 Plots:
 
-[
-Q_z(\tau) ,, \text{vs} ,, Q_g(\tau)
-]
+$Q_z(\tau) \,\text{vs}\, Q_g(\tau)$
+
 
 Diagonal alignment = good distribution fit
 
