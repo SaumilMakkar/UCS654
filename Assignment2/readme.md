@@ -39,9 +39,8 @@ $b_r = 0.3 \times (r \bmod 5 + 1) = 0.9$
 
 The transformation applied to NO₂ values:
 
-[
-z = x + 1.5 \cdot \sin(0.9x)
-]
+$z = x + 1.5 \cdot \sin(0.9x)$
+
 
 This transformation introduces **non-linearity and oscillation**, making PDF estimation more challenging and suitable for GAN learning.
 
