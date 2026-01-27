@@ -258,9 +258,6 @@ The plot below compares the **Kernel Density Estimates (KDE)** of the real trans
 
 This visualization confirms that the GAN has learned the density shape reasonably well.
 
-```md
-![PDF Comparison](ss2.png)
-```
 
 
 
