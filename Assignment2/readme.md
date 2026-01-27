@@ -243,13 +243,13 @@ Below is the exact block you can copy-paste into your `README.md`, and then just
 
 ---
 
-# 🖼 **7. Output & Visual Results**
+# **7. Output & Visual Results**
 
 This section presents the visual and quantitative outputs obtained after training the GAN on the transformed NO₂ distribution.
 
 ---
 
-## ✅ **7.1 PDF Comparison (Real vs Generated)**
+##  **7.1 PDF Comparison (Real vs Generated)**
 
 The plot below compares the **Kernel Density Estimates (KDE)** of the real transformed distribution and the generated distribution:
 
@@ -267,7 +267,7 @@ Preview from your output:
 
 ---
 
-## 📊 **7.2 Quantitative Evaluation**
+##  **7.2 Quantitative Evaluation**
 
 The following metrics are computed after training:
 
