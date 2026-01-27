@@ -1,15 +1,3 @@
-Below is a **complete, polished, professional README.md** specifically written **for the exact code you provided**, including:
-
-✔ Methodology
-✔ Explanation of GAN architecture
-✔ Description of 6-plot figure
-✔ Result table
-✔ Interpretation of metrics
-✔ Clean formatting
-
-You can **copy–paste directly into your GitHub repository**.
-
----
 
 # 📄 **README — PDF Estimation Using GAN (UCS654 Assignment)**
 
@@ -23,7 +11,7 @@ You can **copy–paste directly into your GitHub repository**.
 
 ---
 
-# ⭐ **1. Project Overview**
+# **1. Project Overview**
 
 This project implements a **Generative Adversarial Network (GAN)** for **probability density estimation** using only data samples — *no analytical distribution is assumed*.
 
@@ -33,18 +21,23 @@ Finally, multiple visualizations and evaluation metrics are produced to validate
 
 ---
 
-# 🔢 **2. Roll Number–based Transformation**
+# **2. Roll Number–based Transformation**
 
 Given:
 
-```
+```plaintext
 ROLL_NUMBER = 102303862
 ```
 
 Transformation parameters:
 
-* ( a_r = 0.5 \times (r \mod 7) = 1.5 )
-* ( b_r = 0.3 \times (r \mod 5 + 1) = 0.9 )
+[
+a_r = 0.5 \times (r \bmod 7) = 1.5
+]
+
+[
+b_r = 0.3 \times (r \bmod 5 + 1) = 0.9
+]
 
 The transformation applied to NO₂ values:
 
@@ -56,19 +49,19 @@ This transformation introduces **non-linearity and oscillation**, making PDF est
 
 ---
 
-# 🧠 **3. Methodology**
+#  **3. Methodology**
 
 ## **Step 1 — Load Dataset**
 
-* CSV loaded from: `/content/data[1].csv`
-* Column used: `no2`
-* Clean steps:
+Dataset loaded from `/content/data[1].csv`
 
-  * Remove NaNs
-  * Keep positive values
-  * Remove top 1% outliers
+Processing:
 
-Result: cleaned vector `x`
+* Remove NaN values
+* Keep positive values
+* Remove top 1% outliers
+
+Final cleaned vector: ( x )
 
 ---
 
@@ -80,13 +73,13 @@ Using:
 z = x + a_r \sin(b_r x)
 ]
 
-Result: transformed target distribution `z`
+Result: transformed data ( z )
 
 ---
 
 ## **Step 3 — GAN Architecture**
 
-### **🎛 Generator (G)**
+###  **Generator (G)**
 
 Noise → Synthetic sample
 
@@ -96,7 +89,7 @@ Layers: 128 → 256 → 128 → 1
 Activation: LeakyReLU (α=0.2), Linear at output
 ```
 
-### **🎚 Discriminator (D)**
+###  **Discriminator (D)**
 
 Sample → Probability(real)
 
@@ -108,28 +101,32 @@ Activation: LeakyReLU (α=0.2), Sigmoid at output
 
 ### **Training Configuration**
 
-| Component         | Value                |
-| ----------------- | -------------------- |
-| Epochs            | 2000                 |
-| Batch Size        | 128                  |
-| Optimizer         | Adam                 |
-| Learning Rate     | 0.0002               |
-| Loss Function     | Binary Cross Entropy |
-| Gradient Clipping | [-1, 1]              |
-| Normalization     | Z-score              |
+| Component     | Value                |
+| ------------- | -------------------- |
+| Epochs        | 2000                 |
+| Batch Size    | 128                  |
+| Optimizer     | Adam                 |
+| Learning Rate | 0.0002               |
+| Loss Function | Binary Cross Entropy |
+| Normalization | Z-score              |
+| Gradient Clip | [-1, 1]              |
 
 ---
 
-## **Step 4 — Training**
+## **Step 4 — Training Workflow**
 
-At every epoch:
+At each epoch:
 
-1. Sample real batch from normalized data
-2. Generate synthetic batch
-3. Train Discriminator
-4. Train Generator
+1. Sample real batch from ( z )
+2. Generate synthetic batch from ( G )
+3. Update ( D ) to distinguish real/fake
+4. Update ( G ) to fool ( D )
 
-GAN learns to match real distribution.
+Goal:
+
+[
+\min_G \max_D ,, \mathbb{E}[\log D(z)] + \mathbb{E}[\log(1 - D(G(\xi)))]
+]
 
 ---
 
@@ -137,81 +134,84 @@ GAN learns to match real distribution.
 
 10,000 samples generated:
 
-```
+```python
 g = gan.generate(10000)
 ```
 
-These approximate the learned distribution.
+These samples approximate the target distribution.
 
 ---
 
-## **Step 6 — Produce Result Visualizations**
+## **Step 6 — Visualizations**
 
-A **6-plot figure** is created:
+A **2×3 figure** is produced:
 
-### 📊 **Plot 1: Original NO₂ Histogram**
+###  **Plot 1 — Original Distribution**
 
-Shows raw distribution of pollutant values.
+Histogram of original NO₂ values ( x )
 
-### 📗 **Plot 2: Transformed Data Histogram**
+###  **Plot 2 — Transformed Distribution**
 
-Shows altered structure after applying sinusoidal transformation.
+Histogram of transformed values ( z )
 
-### 📘 **Plot 3: Generated Samples Histogram**
+###  **Plot 3 — Generated Distribution**
 
-Visual comparison with transformed data.
+Histogram of synthetic values ( g )
 
-### 🔍 **Plot 4: PDF Comparison (Real vs Generated)**
+###  **Plot 4 — PDF Comparison (KDE)**
 
-Using kernel density estimation (KDE):
+KDE curves estimate PDFs:
 
-* Blue → real transformed PDF
-* Red → GAN-generated PDF
+[
+p_h(z), \quad p_h(g)
+]
 
-This is the **main evaluation plot**.
+Blue = Real PDF, Red = Generated PDF
 
-### 📉 **Plot 5: GAN Loss Curves**
+###  **Plot 5 — GAN Loss Curves**
 
-* Discriminator loss over epochs
-* Generator loss over epochs
+Shows evolution of:
 
-Indicates training stability.
+* Discriminator Loss
+* Generator Loss
 
-### 🔺 **Plot 6: Q-Q Plot**
+###  **Plot 6 — Q-Q Plot**
 
-Checks quantile alignment between real & synthetic data.
+Plots:
 
-A near-diagonal alignment shows distribution similarity.
+[
+Q_z(\tau) ,, \text{vs} ,, Q_g(\tau)
+]
+
+Diagonal alignment = good distribution fit
 
 ---
 
-# 📈 **4. Results (Tables + Interpretation)**
+# **4. Results**
 
-## **4.1 Statistical Comparison Table**
+## **4.1 Statistical Comparison**
 
-| Metric   | Real (z) | Generated (g) | Interpretation            |
-| -------- | -------- | ------------- | ------------------------- |
-| Mean     | μ_real   | μ_gen         | Close → good mode fit     |
-| Std Dev  | σ_real   | σ_gen         | Spread matched well       |
-| Skewness | S_real   | S_gen         | Similar → shape preserved |
-| Kurtosis | K_real   | K_gen         | Tail behavior captured    |
-
-*(Actual numeric values appear when user runs the code.)*
+| Metric   | Real (z) | Generated (g) | Interpretation          |
+| -------- | -------- | ------------- | ----------------------- |
+| Mean     | μ_real   | μ_gen         | Good mode approximation |
+| Std Dev  | σ_real   | σ_gen         | Spread similarity       |
+| Skewness | S_real   | S_gen         | Shape similarity        |
+| Kurtosis | K_real   | K_gen         | Tail behavior preserved |
 
 ---
 
 ## **4.2 Evaluation Metrics**
 
-After KDE + quantile analysis:
+After training:
 
-| Metric                   | Meaning                                  | Interpretation          |
-| ------------------------ | ---------------------------------------- | ----------------------- |
-| **Mode Coverage**        | How well GAN captures distribution peaks | Good                    |
-| **Quality**              | Wasserstein distance < 7                 | Good similarity         |
-| **KS Statistic**         | Max CDF error                            | Lower → better          |
-| **Wasserstein Distance** | Earth-mover distance                     | Small → strong matching |
+| Metric               | Meaning                       | Interpretation     |
+| -------------------- | ----------------------------- | ------------------ |
+| Mode Coverage        | How many peaks GAN matches    | Good               |
+| Quality              | Based on Wasserstein distance | Good similarity    |
+| KS Statistic         | Max CDF error                 | Lower = Better     |
+| Wasserstein Distance | Earth Mover Distance          | Small = Good Match |
 
-Output example:
+Example output:
 
 ```
 Mode coverage: good
@@ -222,65 +222,22 @@ Wasserstein: 3.2
 
 ---
 
-# 🎨 **5. Result Graph Explanation**
+# **5. Result Graph Interpretation**
 
-### ✔ Histograms
+✔ **Histograms** → Visual shape comparison
+✔ **KDE PDF Plot** → Smooth PDF estimation
+✔ **Loss Curves** → Training stability indicator
+✔ **Q-Q Plot** → Quantile matching accuracy
 
-Used to visually compare:
-
-* Original real data
-* Transformed real data
-* Generated synthetic data
-
-Helps see shape similarity.
+If curves overlap & Q-Q points lie near diagonal → GAN learned distribution successfully.
 
 ---
 
-### ✔ PDF Comparison Plot
+#  **6. Conclusion**
 
-This is the **main evaluation**:
-
-* If curves overlap → GAN successfully learned PDF
-* If gaps exist → more training required
-
----
-
-### ✔ Loss Curves
-
-Used to check training stability:
-
-* D-loss should not diverge
-* G-loss should not collapse
-* Both should oscillate moderately
-
-Stable curves mean model trained properly.
-
----
-
-### ✔ Q–Q Plot
-
-Plots:
-
-```
-Quantiles(real) vs Quantiles(generated)
-```
-
-Straight line → distributions match
-Scattered → mismatch
-
-Your model shows near-diagonal alignment.
-
----
-
-# 🏁 **6. Conclusion**
-
-GAN successfully learned the complex transformed distribution
-Generated data matches real distribution statistically
-KDE curves confirm strong PDF similarity
-Training remained stable
-No mode collapse observed
-Useful for non-parametric density estimation tasks
-
-        |
-
-
+✔ GAN successfully learned the transformed distribution
+✔ Generated samples statistically match real samples
+✔ KDE overlap confirms PDF matching
+✔ Loss curves show stable training
+✔ No mode collapse observed
+✔ Suitable for **non-parametric density estimation**
