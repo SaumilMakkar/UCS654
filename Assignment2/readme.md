@@ -263,9 +263,14 @@ This visualization confirms that the GAN has learned the density shape reasonabl
 ```
 
 
+
+Preview from your output:
+
+![PDF Comparison](ss1.png)
+
 ---
 
-## **7.2 Quantitative Evaluation**
+## 📊 **7.2 Quantitative Evaluation**
 
 The following metrics are computed after training:
 
@@ -287,7 +292,7 @@ Wasserstein: 1.7705766257785158
 
 Visual reference:
 
-![Metrics Output](ss1.png)
+![Metrics Output](ss2.png)
 
 ---
 
