@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPSIS Web Service</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TOPSIS Web Service</h1>
+            <p class="subtitle">Multi-Criteria Decision Analysis</p>
+        </header>
+
+        <div class="form-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('analyze') }}" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">File Name</label>
+                    <input type="file" id="file" name="file" accept=".csv" required>
+                    <small>Upload CSV file with alternatives and criteria</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="weights">Weights</label>
+                    <input type="text" id="weights" name="weights" placeholder="1,1,1,1" required>
+                    <small>Comma-separated numeric weights for each criterion</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="impacts">Impacts</label>
+                    <input type="text" id="impacts" name="impacts" placeholder="+,+,-,+" required>
+                    <small>Comma-separated '+' (benefit) or '-' (cost) for each criterion</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Id</label>
+                    <input type="email" id="email" name="email" placeholder="yourgmail@gmail.com" required>
+                    <small>Result file will be sent to this email address</small>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+
+        <div class="info-section">
+            <h3>Requirements:</h3>
+            <ul>
+                <li>The user should provide input file, weights, impacts and email id</li>
+                <li>The user should get the result file through email</li>
+                <li>Number of weights and impacts must each equal the number of criteria columns in your CSV (e.g. 5 criteria → 5 weights and 5 impacts)</li>
+                <li>Impacts must be either +ve or -ve</li>
+                <li>Impacts and weights must be separated by ',' (comma)</li>
+                <li>Format of email id must be correct</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 TOPSIS Web Service | Created by Saumil Makkar</p>
+        </footer>
+    </div>
+</body>
+</html>
