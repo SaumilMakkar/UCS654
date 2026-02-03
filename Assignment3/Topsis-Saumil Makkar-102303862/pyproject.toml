@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Topsis-Saumil-102303862"
+version = "1.0.2"
+description = "A Python package for TOPSIS multi-criteria decision analysis"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+keywords = ["topsis", "mcdm", "decision-making", "multi-criteria", "optimization"]
+authors = [
+    {name = "Saumil Makkar", email = "saumilmakkar@example.com"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "pandas>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/SaumilMakkar/UCS654"
+Repository = "https://github.com/SaumilMakkar/UCS654"
+"Bug Tracker" = "https://github.com/SaumilMakkar/UCS654/issues"
+
+[project.scripts]
+topsis = "topsis.topsis:main"
