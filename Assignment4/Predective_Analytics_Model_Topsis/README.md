@@ -1,55 +1,42 @@
- Project Overview
+# TOPSIS-Based Evaluation of Pre-Trained Models for Text Classification
 
-This project compares multiple pre-trained NLP models for a text classification task and selects the most suitable one using the TOPSIS (Technique for Order Preference by Similarity to Ideal Solution) decision-making approach.
+## Project Overview
+This project implements the TOPSIS (Technique for Order of Preference by Similarity to Ideal Solution) method to systematically evaluate and rank various pre-trained models for text classification tasks.
 
-Instead of relying on a single metric like accuracy, this approach evaluates models using multiple performance measures and ranks them mathematically to determine the optimal choice.
+## Workflow
+1. **Data Acquisition** → Collect text dataset
+2. **Model Evaluation** → Test multiple pre-trained models
+3. **Metrics Computation** → Calculate performance indicators
+4. **TOPSIS Analysis** → Determine optimal model ranking
 
- Methodology
+## Implementation Details
 
-The complete workflow follows these steps:
+**Dataset Source:** `stanfordnlp/sst2.csv`
 
-Data Collection → Model Evaluation → Performance Metrics Calculation → TOPSIS Scoring → Ranking
+**Configuration Parameters:**
+- **Weights:** Positive real numbers (w > 0)
+- **Impacts:** Binary indicators (+/-)
 
-Collect and preprocess text dataset
+**Deliverables:** Comparative tables and visualization charts
 
-Run classification using different pre-trained models
+## Project Goals
+- Implement TOPSIS mathematical framework for model selection
+- Identify the top-performing model for text classification
+- Analyze sensitivity of rankings to weight and impact variations
 
-Record evaluation metrics (accuracy, precision, recall, etc.)
+## Experimental Results
 
-Apply TOPSIS to compute scores
-
-Rank models based on closeness to the ideal solution
-
- Project Details
-
-Dataset Used: stanfordnlp/sst2.csv
-
-Weights: Positive values only (> 0)
-
-Impacts: Benefit (+) or Cost (–) criteria
-
-Outputs Generated: Performance table and visualization graphs
-
- Objectives
-
-Apply the TOPSIS algorithm using basic mathematical computations
-
-Compare multiple models fairly using several evaluation metrics
-
-Identify the best-performing text classification model
-
-Analyze how modifying weights and impacts affects rankings
-
- Results
-🗃 Input Dataset
+### Input Configuration:
 <img width="518" height="625" alt="image" src="https://github.com/user-attachments/assets/19497b27-281c-4d5d-89fd-6765b5605743" />
-📊 Output Table
-<img width="1236" height="489" alt="image" src="https://github.com/user-attachments/assets/86510cf7-7440-41ec-a247-2b0ad23991b6" />
-📉 Output Graphs
-<img width="789" height="585" alt="image" src="https://github.com/user-attachments/assets/3e3d614d-1e6b-4cab-acce-700d44718403" /> <img width="789" height="588" alt="image" src="https://github.com/user-attachments/assets/d5bb09b8-76d4-4506-855b-cf7086a8244a" />
- Conclusion
- By integrating TOPSIS with model evaluation, this project provides a structured and unbiased way to select the best classifier.
-This multi-criteria approach ensures that decisions are not dependent on a single metric, leading to more reliable and balanced model selection.
 
-By integrating TOPSIS with model evaluation, this project provides a structured and unbiased way to select the best classifier.
-This multi-criteria approach ensures that decisions are not dependent on a single metric, leading to more reliable and balanced model selection.
+---
+
+### TOPSIS Ranking Results:
+<img width="1236" height="489" alt="image" src="https://github.com/user-attachments/assets/86510cf7-7440-41ec-a247-2b0ad23991b6" />
+
+---
+
+### Performance Visualizations:
+<img width="789" height="585" alt="image" src="https://github.com/user-attachments/assets/3e3d614d-1e6b-4cab-acce-700d44718403" />
+
+<img width="789" height="588" alt="image" src="https://github.com/user-attachments/assets/d5bb09b8-76d4-4506-855b-cf7086a8244a" />
