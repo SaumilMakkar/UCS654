@@ -1,0 +1,2 @@
+This is file number 10
+Created by thread: Thread-10
